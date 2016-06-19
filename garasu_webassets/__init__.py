@@ -20,6 +20,7 @@ from contextlib import closing
 import fileinput
 import logging
 from os import path
+import os
 from pyramid.path import AssetResolver
 from pyramid.settings import asbool
 import six
@@ -32,12 +33,13 @@ LOG = logging.getLogger(__name__)
 
 def includeme(config):
     """pyramid include. declare the add_thumb_view"""
+    here = os.path.dirname(__file__)
     settings = config.get_settings()
 
-    config_dir = settings.get('garasu_webassets.config', 'config')
+    config_dir = settings.get('garasu_webassets.config', '{}/configs'.format(here))
     LOG.debug(config_dir)
     # config_dir = AssetResolver(None).resolve(config_dir).abspath()
-    asset_dir = settings.get('garasu_webassets.assets', 'assets')
+    asset_dir = settings.get('garasu_webassets.assets', '{}/assets'.format(here))
     LOG.debug(asset_dir)
     # asset_dir = AssetResolver(None).resolve(asset_dir).abspath()
 
