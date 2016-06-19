@@ -31,9 +31,9 @@ def includeme(config):
     settings = config.get_settings()
 
     config_dir = settings.get('garasu_webassets.config', 'config')
-    config_dir = AssetResolver(None).resolve(config_dir).abspath()
+    # config_dir = AssetResolver(None).resolve(config_dir).abspath()
     asset_dir = settings.get('garasu_webassets.assets', 'assets')
-    asset_dir = AssetResolver(None).resolve(asset_dir).abspath()
+    # asset_dir = AssetResolver(None).resolve(asset_dir).abspath()
 
     env = Environment(directory=asset_dir, url=settings['garasu_webassets.url'])
     env.manifest = settings['garasu_webassets.manifest']
