@@ -34,7 +34,7 @@ LOG = logging.getLogger(__name__)
 def includeme(config):
     """pyramid include. declare the add_thumb_view"""
     here = os.path.dirname(__file__)
-    settings = config.get_settings()
+    settings = config.registry.settings
 
     config_dir = settings.get('garasu_webassets.config', '{}/configs'.format(here))
     LOG.debug(config_dir)
