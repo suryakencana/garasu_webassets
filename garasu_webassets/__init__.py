@@ -35,6 +35,7 @@ def includeme(config):
     """pyramid include. declare the add_thumb_view"""
     here = os.path.dirname(__file__)
     settings = config.registry.settings
+    print(asbool(settings['garasu_webassets.config']))
     conf_assets = settings['garasu_webassets']
 
     config_dir = conf_assets.get('config', '{}/configs'.format(here))
