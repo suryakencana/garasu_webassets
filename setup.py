@@ -20,7 +20,7 @@ requires = [
     ]
 
 setup(name='garasu_webassets',
-      version='0.3.1',
+      version='0.3.2',
       description='garasu_webassets',
       long_description=README + '\n\n' + CHANGES,
       classifiers=[
