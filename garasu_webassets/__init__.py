@@ -35,22 +35,19 @@ def includeme(config):
     """pyramid include. declare the add_thumb_view"""
     here = os.path.dirname(__file__)
     settings = config.registry.settings
-    print(asbool(settings['garasu_webassets.config']))
-    conf_assets = settings['garasu_webassets']
 
-    config_dir = conf_assets.get('config', '{}/configs'.format(here))
+    config_dir = settings.get('garasu_webassets.config', '{}/configs'.format(here))
     LOG.debug(config_dir)
-
     # config_dir = AssetResolver(None).resolve(config_dir).abspath()
-    asset_dir = conf_assets.get('assets', '{}/assets'.format(here))
+    asset_dir = settings.get('garasu_webassets.assets', '{}/assets'.format(here))
     LOG.debug(asset_dir)
     # asset_dir = AssetResolver(None).resolve(asset_dir).abspath()
 
-    env = Environment(directory=asset_dir, url=conf_assets['url'])
-    env.manifest = conf_assets['manifest']
-    env.debug = asbool(conf_assets['debug'])
-    env.cache = asbool(conf_assets['cache'])
-    env.auto_build = asbool(conf_assets['auto_build'])
+    env = Environment(directory=asset_dir, url=settings['garasu_webassets.url'])
+    env.manifest = settings['garasu_webassets.manifest']
+    env.debug = asbool(settings['garasu_webassets.debug'])
+    env.cache = asbool(settings['garasu_webassets.cache'])
+    env.auto_build = asbool(settings['garasu_webassets.auto_build'])
 
     def text(value):
         if type(value) is six.binary_type:
@@ -63,7 +60,7 @@ def includeme(config):
             return open(fname, mode)
         raise FileNotFoundError
 
-    fin = fileinput.input('/'.join([config_dir, conf_assets['bundles']]),
+    fin = fileinput.input('/'.join([config_dir, settings['garasu_webassets.bundles']]),
                           openhook=yaml_stream)
     with closing(fin):
         lines = [text(line).rstrip() for line in fin]
