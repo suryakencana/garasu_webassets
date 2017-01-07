@@ -39,6 +39,7 @@ def includeme(config):
 
     config_dir = conf_assets.get('config', '{}/configs'.format(here))
     LOG.debug(config_dir)
+
     # config_dir = AssetResolver(None).resolve(config_dir).abspath()
     asset_dir = conf_assets.get('assets', '{}/assets'.format(here))
     LOG.debug(asset_dir)
